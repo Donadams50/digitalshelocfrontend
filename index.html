@@ -26,9 +26,9 @@
       </div>
       <p class="login-box-msg">Welcome back, Admin</p>
 
-      <form action="dashboard.html" >
+      <form id="signInForm" >
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" id="email" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" id="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -54,40 +54,81 @@
           </div> -->
           <!-- /.col -->
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" id="signInButton"  onClick="signIn()" class="btn btn-primary btn-block">Sign In</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-      <!-- <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div> -->
-      <!-- /.social-auth-links -->
-
-      <!-- <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p> -->
+     
     </div>
-    <!-- /.login-card-body -->
+    
   </div>
 </div>
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<script>
+    
+ 
+const signIn = async () => { 
+  // alert("success")
+  if ($.trim($("#email").val()) === "" || $.trim($("#password").val()) === "") {
+        alert('You did not fill out one of the fields');
+        return false;
+    }
+  else{
+   url = "https://digital-sherlock.herokuapp.com/authenticate";
+   var email = $("#email").val();
+   var password = $("#password").val();
+    
+  
+  
+   var  data = { 
+               email :email ,
+               password : password,           
+              }
+       $.ajax({
+             type: 'POST',
+             data : JSON.stringify(data),
+             url: url,
+             dataType: 'json',
+             contentType : "application/json",
+             beforeSend: function(jqXHR, settings) {
+               jqXHR.setRequestHeader('Authorization', 'App-456328910' );
+               $('#signInButton').prop('disabled', true);
+               
+             },
+             success: function(data) {
+               alert("Successfull login")
+               console.log(data)
+               $('#signInButton').prop('disabled', false);
+               window.location.href = "https://mystifying-morse-f6e937.netlify.app/dashboard.html";
+               
+             },
+             error: function(data){
+               $('#signInButton').prop('disabled', false);
+               
+                 alert(data.responseJSON.message)
+                 //console.log(data.responseJSON.message)
+                
+                
+                 
+ 
+             },
+             complete: function(jqXHR) {
+               
+               
+             }
+           });
+          }               
+                };
+
+</script>
 </body>
 </html>

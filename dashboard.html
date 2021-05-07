@@ -238,7 +238,11 @@
 })
 
 const postBroker = async () => { 
- // alert("success")
+ // alert("success") 
+ if ($.trim($("#email").val()) === "" || $.trim($("#firstName").val()) === "" || $.trim($("#lastName").val()) === "") {
+        alert('You did not fill out one of the fields');
+        return false;
+    }else{
   url = "https://digital-sherlock.herokuapp.com/broker";
   var email = $("#email").val();
   var firstName = $("#firstName").val();
@@ -286,7 +290,7 @@ const postBroker = async () => {
                $('.myclose').click(); 
 						}
 					});
-                      
+}              
                };
 
 const updateBroker = async (brokerId) => { 
@@ -477,6 +481,10 @@ const refetchBrokers = async () =>{
 
 
 const updateDataBrokersFinal = async () => { 
+  if ($.trim($("#emailEdit").val()) === "" || $.trim($("#firstNameEdit").val()) === "" || $.trim($("#lastNameEdit").val()) === "") {
+        alert('You did not fill out one of the fields');
+        return false;
+    }else{
  
    var id = $("#idEdit").val();
   // alert(id)
@@ -527,7 +535,7 @@ const updateDataBrokersFinal = async () => {
               //  $('.myclose').click(); 
 						}
 					});
-                      
+        }            
                };
 
 
