@@ -151,6 +151,13 @@
                   <p>Data brokers</p>
                 </a>
               </li>
+              <li class="mt-5">
+                <a onClick="logOut()"class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Log out</p>
+                </a>
+
+              </li>
             
             </ul>
           </li>
@@ -230,10 +237,16 @@
 <!-- Page specific script -->
 <script>
   $(document).ready(function () {
+    //alert(localStorage.getItem('token'));
    // $('#exampleModalCenter').modal("show")=false
-      fetchBrokers()
-    
-
+   var token = sessionStorage.getItem('token')
+   if ( token === "" || token === null) {
+    window.location.href = "https://mystifying-morse-f6e937.netlify.app/index.html";
+  //window.location.href = "http://127.0.0.1:5500/index.html";
+  
+   }else{
+    fetchBrokers()
+   }
               
 })
 
@@ -538,6 +551,10 @@ const updateDataBrokersFinal = async () => {
         }            
                };
 
+const logOut = async () => {
+  sessionStorage.removeItem("token");
+  window.location.href = "https://mystifying-morse-f6e937.netlify.app/index.html";
+}
 
 </script>
 </body>

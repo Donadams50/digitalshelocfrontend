@@ -105,9 +105,13 @@ const signIn = async () => {
                
              },
              success: function(data) {
-               alert("Successfull login")
-               console.log(data)
+              // alert("Successfull login")
+               var token =  data.token
+               sessionStorage.setItem('token',token);
+              // alert(localStorage.getItem('token'));
+               console.log(data.token)
                $('#signInButton').prop('disabled', false);
+              
                window.location.href = "https://mystifying-morse-f6e937.netlify.app/dashboard.html";
                
              },
