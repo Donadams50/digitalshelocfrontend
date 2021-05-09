@@ -112,8 +112,8 @@ const signIn = async () => {
                console.log(data.token)
                $('#signInButton').prop('disabled', false);
               
-               //window.location.href = "https://mystifying-morse-f6e937.netlify.app/dashboard.html";
-               window.location.href = "http://127.0.0.1:5500/dashboard.html";
+               window.location.href = "https://mystifying-morse-f6e937.netlify.app/dashboard.html";
+               //window.location.href = "http://127.0.0.1:5500/dashboard.html";
              },
              error: function(data){
                $('#signInButton').prop('disabled', false);
