@@ -241,8 +241,8 @@
    // $('#exampleModalCenter').modal("show")=false
    var token = sessionStorage.getItem('token')
    if ( token === "" || token === null) {
-    window.location.href = "https://mystifying-morse-f6e937.netlify.app/index.html";
-  //window.location.href = "http://127.0.0.1:5500/index.html";
+   // window.location.href = "https://mystifying-morse-f6e937.netlify.app/index.html";
+  window.location.href = "http://127.0.0.1:5500/index.html";
   
    }else{
     fetchBrokers()
@@ -262,8 +262,8 @@ const postBroker = async () => {
   var lastName = $("#lastName").val();
  
 	var  data = { 
-              brokerFirstName :lastName ,
-              brokerLastName : firstName,
+              brokerFirstName : firstName,
+              brokerLastName : lastName ,
               brokerEmail : email
 			}
       $.ajax({
